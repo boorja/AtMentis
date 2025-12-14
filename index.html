@@ -1,0 +1,390 @@
+<html>
+  <head>
+    <!-- AtPaedia == AtMentis == AtNexo == AtNexus == atpAIdeia -->
+    <title>AtMentis</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="src/styles.css" />
+    <link rel="icon" type="image/png" href="src/assets/addlogo3.png">
+  </head>
+
+  <body class="loading">
+    
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+      <!-- Floating particles -->
+      <div class="loading-particle"></div>
+      <div class="loading-particle"></div>
+      <div class="loading-particle"></div>
+      <div class="loading-particle"></div>
+      
+      <div class="loading-content">
+        <img src="src/assets/addlogo.png" alt="AtMentis Logo" class="loading-logo">
+        <div class="loading-text">AtMentis</div>
+        
+        <!-- Knowledge Graph Network Spinner -->
+        <div class="loading-spinner">
+          <div class="spinner-center"></div>
+          <div class="spinner-node"></div>
+          <div class="spinner-node"></div>
+          <div class="spinner-node"></div>
+          <div class="spinner-node"></div>
+          <div class="spinner-node"></div>
+          <div class="spinner-node"></div>
+        </div>
+        
+        <div class="loading-progress-text">Iniciando aplicación...</div>
+      </div>
+    </div>
+
+    <!-- Start Screen - Interactive Graph Interface -->
+    <div id="start-screen" class="start-screen hidden">
+      <!-- Interactive Graph Container -->
+      <div id="graph-container" class="graph-container">
+        <!-- Main/Central Node (AtMentis) -->
+        <div class="graph-node main-node" id="main-node" data-node="main">
+          <img src="src/assets/addlogo.png" alt="AtMentis Logo" class="node-logo">
+          <div class="node-label">AtMentis</div>
+        </div>
+        
+        <!-- Option Nodes -->
+        <div class="graph-node option-node" id="load-graphs-node" data-node="load-graphs">
+          <div class="node-icon">📊</div>
+          <div class="node-label">Ver Grafos</div>
+          <div class="node-description">Explorar grafos en Virtuoso</div>
+        </div>
+        
+        <!-- Upload Ontology Node - Recreated -->
+        <div class="graph-node option-node" id="upload-node" data-node="upload">
+          <div class="node-icon">📤</div>
+          <div class="node-label">Subir Ontología</div>
+          <div class="node-description">Cargar nueva ontología</div>
+        </div>
+      </div>
+      
+      <!-- Graph Controls -->
+      <div class="graph-controls">
+        <button class="control-button" id="reset-positions" title="Resetear Posiciones">🔄</button>
+        <button class="control-button" id="center-graph" title="Centrar Grafo">🎯</button>
+      </div>
+      
+      <!-- File Upload Modal (initially hidden) -->
+      <div id="upload-modal" class="upload-modal hidden">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Subir Ontología</h3>
+            <button class="modal-close" id="modal-close">×</button>
+          </div>
+          <div class="modal-body">
+            <div class="upload-area" id="upload-area">
+              <div class="upload-icon">📁</div>
+              <p>Arrastra tu archivo de ontología aquí o haz clic para seleccionar</p>
+              <p class="upload-formats">Formatos soportados: .owl, .ttl, .rdf, .n3</p>
+              <input type="file" id="ontology-file-input" accept=".owl,.ttl,.rdf,.n3" hidden>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Graph List Modal (initially hidden) -->
+      <div id="graph-list-modal" class="graph-list-modal hidden">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Grafos Disponibles</h3>
+            <button class="modal-close" id="graph-modal-close">×</button>
+          </div>
+          <div class="modal-body">
+            <div class="graph-list-container">
+              <div class="loading-graphs">
+                <div class="spinner"></div>
+                <p>Cargando grafos disponibles...</p>
+              </div>
+              <div class="graph-list" id="graph-list" style="display: none;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Knowledge Graph Initialization Screen -->
+    <div id="kg-init-screen" class="kg-init-screen hidden">
+      <div class="kg-init-content">
+        <div class="kg-init-header">
+          <div class="kg-init-logo">
+            <img src="src/assets/addlogo.png" alt="AtMentis" class="kg-logo-image">
+            <div class="kg-init-spinner"></div>
+          </div>
+          <h1 class="kg-init-title">Inicializando Knowledge Graph</h1>
+          <p class="kg-init-subtitle" id="kg-init-graph-name">Procesando ontología seleccionada...</p>
+        </div>
+        
+        <div class="kg-init-progress-section">
+          <!-- Progress Bar -->
+          <div class="kg-progress-container">
+            <div class="kg-progress-bar">
+              <div class="kg-progress-fill" id="kg-progress-fill">
+                <div class="kg-progress-shimmer"></div>
+              </div>
+            </div>
+            <div class="kg-progress-info">
+              <span class="kg-progress-step" id="kg-progress-step">Preparando inicialización...</span>
+              <span class="kg-progress-percentage" id="kg-progress-percentage">0%</span>
+            </div>
+          </div>
+          
+          <!-- Technical Details -->
+          <div class="kg-technical-details">
+            <div class="kg-detail-item">
+              <span class="kg-detail-label">Modelo KG:</span>
+              <span class="kg-detail-value">ComplEx (256D)</span>
+            </div>
+            <div class="kg-detail-item">
+              <span class="kg-detail-label">Embeddings:</span>
+              <span class="kg-detail-value">LaBSE Multilingüe</span>
+            </div>
+            <div class="kg-detail-item">
+              <span class="kg-detail-label">Estado:</span>
+              <span class="kg-detail-value" id="kg-status-value">Conectando...</span>
+            </div>
+          </div>
+          
+          <!-- Real-time Logs -->
+          <div class="kg-logs-section">
+            <div class="kg-logs-header">
+              <span>Logs del Sistema</span>
+              <div class="kg-logs-indicator"></div>
+            </div>
+            <div class="kg-logs-container" id="kg-logs-container">
+              <div class="kg-log-entry startup">
+                <span class="kg-log-time">[Sistema]</span>
+                <span class="kg-log-message">Iniciando proceso de inicialización...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Footer with branding -->
+        <div class="kg-init-footer">
+          <div class="kg-brand">
+            <img src="src/assets/addlogo.png" alt="AtMentis" class="kg-brand-logo">
+            <span class="kg-brand-text">AtMentis</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Main Application (initially hidden) -->
+    <div id="main-app" class="app hidden">
+      <div id="labels"></div>
+      <canvas />
+    </div>
+
+
+    <div class="action-container">
+      <div class="actions-header">Actions:</div>
+      <button id="pause">Pause</button>
+      <button id="fit-view">Smart Fit View</button>
+      <button id="zoom">Select Important Node</button>
+      <button id="select-points-in-area">Area Selection</button>
+      <button id="back-to-menu" title="Volver al menú principal">🏠 Menú Principal</button>
+    </div>
+
+    <!-- Annotations Popup Window -->
+    <div id="annotations-popup" class="annotations-popup" style="display: none;">
+      <div class="annotations-popup-header">
+        <span class="annotations-popup-title">Node Annotations</span>
+        <button id="annotations-close" class="annotations-close-button">×</button>
+      </div>
+      <div class="annotations-popup-content">
+        <div id="annotations-content"></div>
+      </div>
+    </div>
+
+    <!-- Back to Menu Confirmation Banner -->
+    <div id="back-to-menu-confirmation" class="confirmation-banner" style="display: none;">
+      <div class="confirmation-content">
+        <div class="confirmation-message">
+          ¿Estás seguro de que quieres volver al menú principal? Se mantendrá el estado del grafo actual.
+        </div>
+        <div class="confirmation-buttons">
+          <button id="confirm-back-to-menu" class="confirm-btn">Sí, volver</button>
+          <button id="cancel-back-to-menu" class="cancel-btn">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Banner for Back to Menu -->
+    <div id="confirmation-banner" class="confirmation-banner" style="display: none;">
+      <div class="confirmation-content">
+        <div class="confirmation-icon">⚠️</div>
+        <div class="confirmation-text">
+          <h3>¿Volver al menú principal?</h3>
+          <p>Se mantendrá tu sesión actual. Podrás volver a este grafo o seleccionar otro.</p>
+        </div>
+        <div class="confirmation-buttons">
+          <button id="confirm-back-to-menu" class="confirm-btn">Confirmar</button>
+          <button id="cancel-back-to-menu" class="cancel-btn">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Assistant Container -->
+    <div id="assistant-container">
+      <div id="assistant-title-bar" class="assistant-title-bar">
+        <span>Asistente del Grafo</span>
+        <button id="assistant-toggle" class="assistant-toggle-button">−</button>
+      </div>
+      <div id="assistant-content">
+        <div id="assistant-output"></div>
+        <div class="assistant-input-area">
+          <!-- Active Tags Area - positioned above the input controls -->
+          <div id="active-tags-area" class="active-tags-area" style="display: none;"></div>
+          
+          <!-- Input controls row -->
+          <div class="input-controls-row">
+            <!-- Tag System -->
+            <div class="tag-system-container">
+              <button id="tag-button" class="tag-button" aria-label="Insertar etiqueta interactiva">@</button>
+              <div id="tag-menu" class="tag-menu">
+                <button class="tag-menu-item" data-tag="@Browse" data-tag-type="browse">
+                  <span class="tag-icon">🔍</span>
+                  <div>
+                    <div>@Browse</div>
+                    <div class="tag-description">Expandir grafo con nodos relacionados</div>
+                  </div>
+                </button>
+                <button class="tag-menu-item" data-tag="@Select" data-tag-type="select" style="opacity: 0.5; cursor: not-allowed;" disabled>
+                  <span class="tag-icon">🎯</span>
+                  <div>
+                    <div>@Select</div>
+                    <div class="tag-description">Seleccionar nodos específicos (próximamente)</div>
+                  </div>
+                </button>
+                <button class="tag-menu-item" data-tag="@Create" data-tag-type="create" style="opacity: 0.5; cursor: not-allowed;" disabled>
+                  <span class="tag-icon">✨</span>
+                  <div>
+                    <div>@Create</div>
+                    <div class="tag-description">Crear nuevos nodos (próximamente)</div>
+                  </div>
+                </button>
+              </div>
+            </div>
+            
+            <div class="input-wrapper">
+              <input id="assistant-input" type="text" placeholder="Pregunta sobre el grafo o usa @ para etiquetas..." aria-label="Entrada de pregunta para el asistente">
+            </div>
+            <button id="assistant-send">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Context Menu for All Node Types -->
+    <div id="context-menu" class="context-menu" style="display: none;">
+      <!-- Back Button (hidden by default) -->
+      <button id="context-menu-back" class="context-menu-back" style="display: none;">
+        <span class="back-icon">x</span>
+      </button>
+      
+      <!-- Table Title (hidden by default) -->
+      <div id="context-menu-table-title" class="context-menu-table-title" style="display: none;">
+        Object Properties
+      </div>
+      
+      <!-- Data Properties Title (hidden by default) -->
+      <div id="context-menu-data-title" class="context-menu-table-title" style="display: none;">
+        Data Properties
+      </div>
+      
+      <!-- Annotations Title (hidden by default) -->
+      <div id="context-menu-annotations-title" class="context-menu-table-title" style="display: none;">
+        Annotations
+      </div>
+      
+      <!-- Menu Options Container -->
+      <div id="context-menu-options" class="context-menu-options">
+        <!-- Instance Node Options -->
+        <div class="context-menu-item instance-option" data-action="expand-data-properties">
+          <span class="context-menu-icon">🏷️</span>
+          <span class="context-menu-text">Show Data Properties</span>
+        </div>
+        <div class="context-menu-item instance-option" data-action="expand-object-assertions">
+          <span class="context-menu-icon">🗃️</span>
+          <span class="context-menu-text">Show Object Properties</span>
+        </div>
+        
+        <!-- Class Node Options -->
+        <div class="context-menu-item class-option" data-action="show-info">
+          <span class="context-menu-icon">🔍</span>
+          <span class="context-menu-text">Show Node Information</span>
+        </div>
+        <div class="context-menu-item class-option" data-action="retry-expansion">
+          <span class="context-menu-icon">⚡</span>
+          <span class="context-menu-text">Retry Expansion</span>
+        </div>
+        
+        <!-- Common Options (available for both instance and class nodes) -->
+        <div class="context-menu-item common-option" data-action="show-annotations">
+          <span class="context-menu-icon">📝</span>
+          <span class="context-menu-text">Show Annotations</span>
+        </div>
+      </div>
+        
+      <!-- Object Assertions Table Container -->
+      <div id="object-assertions-table-container" class="table-container" style="display: none;">
+        <div class="table-content">
+          <table id="object-assertions-table" class="assertions-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Target</th>
+              </tr>
+            </thead>
+            <tbody id="object-assertions-tbody">
+              <!-- Table content will be dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+        <div class="table-footer">
+          <button id="expand-assertions-graph" class="expand-graph-button">Expand in Graph</button>
+        </div>
+      </div>
+      
+      <!-- Data Properties Table Container -->
+      <div id="data-properties-table-container" class="table-container" style="display: none;">
+        <div class="table-content">
+          <table id="data-properties-table" class="assertions-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody id="data-properties-tbody">
+              <!-- Table content will be dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- Annotations Table Container -->
+      <div id="annotations-table-container" class="table-container" style="display: none;">
+        <div class="table-content">
+          <table id="annotations-table" class="assertions-table annotations-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody id="annotations-tbody">
+              <!-- Table content will be dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="src/interactive-startup.js"></script>
+    <script src="src/index.js"></script>
+  </body>
+</html>
