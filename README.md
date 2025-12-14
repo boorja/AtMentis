@@ -1,7 +1,7 @@
-# Graph Visualizer – Asistente Inteligente para Grafos de Conocimiento
+# AtMentis – Asistente Inteligente para Grafos de Conocimiento
 
 <div align="center">
-  <img src="src/assets/addlogo.png" alt="Graph Visualizer Logo" width="200" height="200"/>
+  <img src="src/assets/addlogo.png" alt="AtMentis Logo" width="200" height="200"/>
 </div> 
 
 <div align="center">
@@ -32,7 +32,7 @@
 
 ## 📋 Descripción
 
-**Graph Visualizer** es una plataforma para la exploración y consulta inteligente de grafos de conocimiento. Ofrece una visualización interactiva de ontologías almacenadas en servidores Virtuoso, junto con un asistente conversacional que responde preguntas utilizando modelos de lenguaje y sistemas de embeddings.
+**AtMentis** es una plataforma para la exploración y consulta inteligente de grafos de conocimiento. Ofrece una visualización interactiva de ontologías almacenadas en servidores Virtuoso, junto con un asistente conversacional que responde preguntas utilizando modelos de lenguaje y sistemas de embeddings.
 
 El sistema combina técnicas de procesamiento de lenguaje natural, representación vectorial, enriquecimiento semántico automático y visualización gráfica para brindar una experiencia completa de navegación ontológica con comprensión contextual avanzada.
 
