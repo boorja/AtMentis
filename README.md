@@ -1,4 +1,4 @@
-# AtMentis – Asistente Inteligente para Grafos de Conocimiento
+# AtMentis – Intelligent Assistant for Knowledge Graphs
 
 <div align="center">
   <img src="src/assets/addlogo.png" alt="AtMentis Logo" width="200" height="200"/>
@@ -6,513 +6,513 @@
 
 <div align="center">
 
-![Versión](https://img.shields.io/badge/versión-2.0.0-blue)
+![Version](https://img.shields.io/badge/version-2.0.0-blue)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-brightgreen)
 ![Flask](https://img.shields.io/badge/Flask-2.0%2B-lightgrey)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.68%2B-green)
 
 </div>
 
-## 📚 Tabla de contenido
+## 📚 Table of Contents
 
-- [📋 Descripción](#-descripción)
-- [🌟 Funcionalidades destacadas](#-funcionalidades-destacadas)
-- [🔧 Requisitos del sistema](#-requisitos-del-sistema)
-- [💻 Instalación](#-instalación)
-- [🚀 Uso del sistema](#-uso-del-sistema)
-  - [🎯 Pantalla de inicio interactiva](#-nueva-pantalla-de-inicio-interactiva)
-  - [📊 Selección de grafos desde Virtuoso](#-opción-1-ver-grafos-disponibles-en-virtuoso)
-  - [📤 Subida de ontologías](#-opción-2-subir-nueva-ontología)
-  - [🧠 Inicialización del Knowledge Graph](#-pantalla-de-inicialización-del-knowledge-graph)
-- [🔄 Arquitectura del sistema](#-arquitectura-del-sistema)
-- [📡 API REST](#-api-rest)
-- [⚙️ Configuración avanzada](#-configuración-avanzada)
-- [📂 Estructura del proyecto](#-estructura-del-proyecto)
-- [⚠️ Solución de problemas](#-solución-de-problemas)
+- [📋 Description](#-description)
+- [🌟 Key Features](#-key-features)
+- [🔧 System Requirements](#-system-requirements)
+- [💻 Installation](#-installation)
+- [🚀 System Usage](#-system-usage)
+  - [🎯 Interactive Startup Screen](#-new-interactive-startup-screen)
+  - [📊 Graph Selection from Virtuoso](#-option-1-view-available-graphs-in-virtuoso)
+  - [📤 Ontology Upload](#-option-2-upload-new-ontology)
+  - [🧠 Knowledge Graph Initialization](#-knowledge-graph-initialization-screen)
+- [🔄 System Architecture](#-system-architecture)
+- [📡 REST API](#-rest-api)
+- [⚙️ Advanced Configuration](#-advanced-configuration)
+- [📂 Project Structure](#-project-structure)
+- [⚠️ Troubleshooting](#-troubleshooting)
 
-## 📋 Descripción
+## 📋 Description
 
-**AtMentis** es una plataforma para la exploración y consulta inteligente de grafos de conocimiento. Ofrece una visualización interactiva de ontologías almacenadas en servidores Virtuoso, junto con un asistente conversacional que responde preguntas utilizando modelos de lenguaje y sistemas de embeddings.
+**AtMentis** is a platform for intelligent exploration and querying of knowledge graphs. It offers interactive visualization of ontologies stored in Virtuoso servers, along with a conversational assistant that answers questions using language models and embedding systems.
 
-El sistema combina técnicas de procesamiento de lenguaje natural, representación vectorial, enriquecimiento semántico automático y visualización gráfica para brindar una experiencia completa de navegación ontológica con comprensión contextual avanzada.
+The system combines natural language processing techniques, vector representation, automatic semantic enrichment, and graphical visualization to provide a complete ontological navigation experience with advanced contextual understanding.
 
-## 🌟 Funcionalidades destacadas
+## 🌟 Key Features
 
-- **Visualización interactiva** con Cosmograph
-- **Asistente conversacional contextualizado** con formato Markdown
-- **Sistema de embeddings adaptativos** que selecciona automáticamente el modelo óptimo (por implementar)
-- **Enriquecimiento semántico automático** con descubrimiento automático de predicados
-- **Navegación jerárquica** por clases e instancias con análisis de profundidad
-- **Consultas SPARQL automáticas** optimizadas para Virtuoso
-- **Estrategia adaptativa de modelos de embedding** según tipo y longitud del contenido (actualmente en revisión)
-- **Sistema de caché inteligente** con expiración automática 
-- **Exploración contextual** basada en visibilidad del grafo actual
-- **API REST completa** para integración con sistemas externos
-- **Análisis semántico profundo** con múltiples modelos especializados
+- **Interactive visualization** with Cosmograph
+- **Contextualized conversational assistant** with Markdown formatting
+- **Adaptive embeddings system** that automatically selects the optimal model (to be implemented)
+- **Automatic semantic enrichment** with automatic predicate discovery
+- **Hierarchical navigation** through classes and instances with depth analysis
+- **Automatic SPARQL queries** optimized for Virtuoso
+- **Adaptive embedding model strategy** based on content type and length (currently under review)
+- **Intelligent caching system** with automatic expiration
+- **Contextual exploration** based on current graph visibility
+- **Complete REST API** for integration with external systems
+- **Deep semantic analysis** with multiple specialized models
 
-## 🔧 Requisitos del sistema
+## 🔧 System Requirements
 
-### Dependencias principales
+### Main Dependencies
 
 - **Python 3.10+**
-- **Flask 2.0+** y Flask-CORS para el servidor web
-- **FastAPI 0.68+** para la API de consultas SPARQL
-- **PyKEEN** para modelos de grafos de conocimiento
-- **SentenceTransformers** con modelos multilingües
-- **RDFLib** para procesamiento de ontologías
-- **SPARQLWrapper** para consultas a Virtuoso
-- **D3.js** y **Cosmograph** para visualización
-- **Servidor Virtuoso** con ontología cargada
+- **Flask 2.0+** and Flask-CORS for the web server
+- **FastAPI 0.68+** for SPARQL query API
+- **PyKEEN** for knowledge graph models
+- **SentenceTransformers** with multilingual models
+- **RDFLib** for ontology processing
+- **SPARQLWrapper** for Virtuoso queries
+- **D3.js** and **Cosmograph** for visualization
+- **Virtuoso Server** with loaded ontology
 
-### Modelos de embeddings soportados
+### Supported Embedding Models
 
-- **LaBSE**: Multilingüe de alta calidad para textos cortos
-- **all-mpnet-base-v2**: Excelente comprensión semántica general
-- **all-MiniLM-L12-v2**: Eficiente para textos largos
-- **Estrategia adaptativa**: Selección automática según contenido (en revisión)
+- **LaBSE**: High-quality multilingual for short texts
+- **all-mpnet-base-v2**: Excellent general semantic understanding
+- **all-MiniLM-L12-v2**: Efficient for long texts
+- **Adaptive strategy**: Automatic selection based on content (under review)
 
-## 💻 Instalación
+## 💻 Installation
 
 ```bash
-git clone https://github.com/tu-usuario/Graph_Visualizer.git
+git clone https://github.com/your-username/Graph_Visualizer.git
 cd Graph_Visualizer
 pip install -r requirements.txt
 npm install
 ```
 
-### Configuración del sistema
+### System Configuration
 
-#### Configuración del servidor principal (`server.py`):
+#### Main server configuration (`server.py`):
 
 ```python
-# Configuración del modelo LLM
-MODEL_URL = "http://tu-servidor-llm:puerto/v1/chat/completions"
-MODEL_NAME = "nombre-de-tu-modelo"
+# LLM model configuration
+MODEL_URL = "http://your-llm-server:port/v1/chat/completions"
+MODEL_NAME = "your-model-name"
 
-# Configuración de Virtuoso
+# Virtuoso configuration
 VIRTUOSO_CONFIG = {
-    "endpoint": "http://tu-servidor-virtuoso:8890/sparql",
-    "database": "http://tu-ontologia-base/",
-    "username": "tu-usuario",
-    "password": "tu-contraseña"
+    "endpoint": "http://your-virtuoso-server:8890/sparql",
+    "database": "http://your-base-ontology/",
+    "username": "your-username",
+    "password": "your-password"
 }
 ```
 
-#### Configuración de la pantalla de inicio (`interactive-startup.js`):
+#### Startup screen configuration (`interactive-startup.js`):
 
 ```javascript
-// Configuración de endpoints para la pantalla de inicio
+// Endpoint configuration for startup screen
 const CONFIG = {
-  BACKEND_URL: 'http://tu-servidor:5000',        // Servidor Flask principal
-  VIRTUOSO_URL: 'http://tu-servidor:32323',      // Servidor Virtuoso
-  STATE_KEY: 'atmentis_app_state',               // Clave para estado persistente
-  STATE_MAX_AGE: 7 * 24 * 60 * 60 * 1000,      // 7 días de persistencia
-  VALID_EXTENSIONS: ['.owl', '.ttl', '.rdf', '.n3'] // Formatos soportados
+  BACKEND_URL: 'http://your-server:5000',        // Main Flask server
+  VIRTUOSO_URL: 'http://your-server:32323',      // Virtuoso server
+  STATE_KEY: 'atmentis_app_state',               // Persistent state key
+  STATE_MAX_AGE: 7 * 24 * 60 * 60 * 1000,      // 7 days persistence
+  VALID_EXTENSIONS: ['.owl', '.ttl', '.rdf', '.n3'] // Supported formats
 };
 ```
 
-#### Configuración de modelos (`model_config.py`):
+#### Model configuration (`model_config.py`):
 
 ```python
-# Configurar estrategia de embeddings
+# Configure embedding strategy
 EMBEDDING_MODELS = {
     "default": "paraphrase-multilingual-mpnet-base-v2",
-    "adaptive": "adaptive_strategy",  # Recomendado
+    "adaptive": "adaptive_strategy",  # Recommended
     "high_quality": "sentence-transformers/LaBSE"
 }
 
-# Configurar modelo de grafo de conocimiento
+# Configure knowledge graph model
 KG_MODELS = {
     "default": {
-        "name": "ComplEx",  # Modelo principal actual
+        "name": "ComplEx",  # Current main model
         "embedding_dim": 200,
         "num_epochs": 1500
     }
 }
 ```
 
-## 🚀 Uso del sistema
+## 🚀 System Usage
 
-### Inicializar los servicios
+### Initialize Services
 
 ```bash
-# Terminal 1: API de consultas SPARQL (FastAPI)
+# Terminal 1: SPARQL query API (FastAPI)
 python main.py
 
-# Terminal 2: Servidor principal del asistente (Flask)
+# Terminal 2: Main assistant server (Flask)
 python server.py
 
-# Terminal 3: Frontend de visualización interactiva
+# Terminal 3: Interactive visualization frontend
 npm start
 ```
 
-### Acceso y pantalla de inicio
+### Access and Startup Screen
 
-Visita: `http://localhost:1234`
+Visit: `http://localhost:1234`
 
-#### 🎯 Nueva Pantalla de Inicio Interactiva
+#### 🎯 New Interactive Startup Screen
 
-El sistema presenta una **pantalla de inicio interactivA** que permite seleccionar ontologías de diferentes fuentes:
+The system presents an **interactive startup screen** that allows selecting ontologies from different sources:
 
 <div align="center">
-  <img src="docs/startup-screen.png" alt="Pantalla de inicio interactiva" width="600"/>
+  <img src="docs/startup-screen.png" alt="Interactive startup screen" width="600"/>
 </div>
 
-**Elementos de la interfaz:**
-- **Nodo central AtMentis**: Logo principal del sistema
-- **Nodos de opción**: Dos opciones principales para cargar ontologías
+**Interface elements:**
+- **AtMentis central node**: Main system logo
+- **Option nodes**: Two main options for loading ontologies
 
-##### 📊 Opción 1: Ver Grafos Disponibles en Virtuoso
+##### 📊 Option 1: View Available Graphs in Virtuoso
 
-**Funcionalidad:**
-1. **Clic en "Ver Grafos"** - Abre modal con grafos disponibles en el servidor Virtuoso
-2. **Listado automático** - Conecta con Virtuoso y muestra todas las ontologías disponibles
-3. **Información detallada** - Muestra URI completa y número de tripletas por grafo
-4. **Selección condicionada** - Detecta si ya hay un grafo cargado previamente, para reutilizar embeddings
+**Functionality:**
+1. **Click on "View Graphs"** - Opens modal with available graphs on Virtuoso server
+2. **Automatic listing** - Connects to Virtuoso and displays all available ontologies
+3. **Detailed information** - Shows complete URI and number of triples per graph
+4. **Conditional selection** - Detects if a graph was previously loaded to reuse embeddings
 
-**Proceso de selección:**
+**Selection process:**
 ```
-📊 Ver Grafos → Modal con lista → Selección → Verificación de estado → Carga
+📊 View Graphs → Modal with list → Selection → State verification → Load
 ```
 
-##### 📤 Opción 2: Subir Nueva Ontología
+##### 📤 Option 2: Upload New Ontology
 
-**Funcionalidad:**
-1. **Clic en "Subir Ontología"** - Abre modal de carga de archivos
-2. **Drag & Drop** - Arrastra archivos directamente al área de carga
-3. **Explorador de archivos** - Clic para seleccionar archivo del sistema
-4. **Validación automática** - Verifica formato antes de procesar
+**Functionality:**
+1. **Click on "Upload Ontology"** - Opens file upload modal
+2. **Drag & Drop** - Drag files directly to the upload area
+3. **File explorer** - Click to select file from system
+4. **Automatic validation** - Verifies format before processing
 
-**Formatos soportados:**
+**Supported formats:**
 - `.owl` - Web Ontology Language
 - `.ttl` - Turtle syntax  
 - `.rdf` - RDF/XML format
 - `.n3` - Notation3
 
-**Proceso de carga:**
+**Upload process:**
 ```
-📁 Seleccionar archivo → Validación → Subida → Procesamiento → Carga temporal
+📁 Select file → Validation → Upload → Processing → Temporary load
 ```
 
-**Características de la subida:**
-- **Barra de progreso**: Indicador visual del proceso de carga
-- **Validación previa**: Verifica que el archivo sea una ontología válida
-- **Carga temporal**: Los archivos subidos se marcan como temporales
-- **Limpieza automática**: Se eliminan automáticamente al cambiar de grafo o cerrar sesión
-- **Procesamiento en tiempo real**: Muestra número de tripletas procesadas
+**Upload features:**
+- **Progress bar**: Visual indicator of upload process
+- **Pre-validation**: Verifies that the file is a valid ontology
+- **Temporary load**: Uploaded files are marked as temporary
+- **Automatic cleanup**: Automatically deleted when changing graphs or closing session
+- **Real-time processing**: Shows number of processed triples
 
-##### ⚡ Sistema de Estado Persistente
+##### ⚡ Persistent State System
 
-**Gestión automática de sesiones:**
-- **Estado guardado**: Recuerda la última ontología utilizada
-- **Restauración automática**: Al reabrir la aplicación, restaura el estado anterior
-- **Verificación de disponibilidad**: Comprueba que el grafo siga disponible en Virtuoso
+**Automatic session management:**
+- **Saved state**: Remembers the last used ontology
+- **Automatic restoration**: When reopening the app, restores previous state
+- **Availability check**: Verifies that the graph is still available in Virtuoso
 
-**Ventajas del sistema:**
-- ✅ **Optimización de recursos**: Evita reentrenamientos innecesarios
-- ✅ **Gestión temporal**: Limpia automáticamente archivos temporales
-- ✅ **Experiencia fluida**: Transición transparente entre sesiones
+**System advantages:**
+- ✅ **Resource optimization**: Avoids unnecessary retraining
+- ✅ **Temporary management**: Automatically cleans temporary files
+- ✅ **Smooth experience**: Transparent transition between sessions
 
-##### 🧠 Pantalla de Inicialización del Knowledge Graph
+##### 🧠 Knowledge Graph Initialization Screen
 
-Una vez seleccionada una ontología, el sistema muestra una **pantalla de inicialización** que monitorea todo el proceso de entrenamiento:
+Once an ontology is selected, the system displays an **initialization screen** that monitors the entire training process:
 
 <div align="center">
-  <img src="docs/kg-initialization.png" alt="Inicialización del Knowledge Graph" width="600"/>
+  <img src="docs/kg-initialization.png" alt="Knowledge Graph initialization" width="600"/>
 </div>
 
-**Elementos de la pantalla:**
-- **Barra de progreso**: Indicador visual del porcentaje completado (0-100%)
-- **Paso actual**: Descripción detallada de la operación en curso
-- **Detalles técnicos**: Configuración del modelo (ComplEx 256D, LaBSE Multilingüe)
-- **Logs en tiempo real**: Registro detallado de todas las operaciones
+**Screen elements:**
+- **Progress bar**: Visual indicator of completion percentage (0-100%)
+- **Current step**: Detailed description of ongoing operation
+- **Technical details**: Model configuration (ComplEx 256D, LaBSE Multilingual)
+- **Real-time logs**: Detailed record of all operations
 
-#### Interacción con el grafo
+#### Graph Interaction
 
-- **Clic en nodos:** Expande clases y muestra subclases
-- **Zoom:** Rueda del ratón para acercar/alejar
-- **Arrastrar:** Mueve y reposiciona el grafo
-- **Botones de control:**
-  - **Pausar/Reanudar:** Control de la simulación física
-  - **Retroceder:** Regresa al estado anterior del grafo
-  - **Volver al menú:** Regresa a la pantalla de inicio
+- **Click on nodes:** Expands classes and shows subclasses
+- **Zoom:** Mouse wheel to zoom in/out
+- **Drag:** Move and reposition the graph
+- **Control buttons:**
+  - **Pause/Resume:** Physics simulation control
+  - **Go back:** Returns to previous graph state
+  - **Return to menu:** Returns to startup screen
 
-#### 🏠 Navegación entre ontologías
+#### 🏠 Navigation Between Ontologies
 
-**Botón "Volver al Menú":**
-- **Funcionalidad**: Regresa a la pantalla de inicio sin cerrar la aplicación
-- **Gestión inteligente**: 
-  - Si hay una ontología temporal cargada, la limpia automáticamente
-  - Preserva ontologías permanentes de Virtuoso
-  - Permite cambiar entre diferentes grafos sin reiniciar el servidor
+**"Return to Menu" button:**
+- **Functionality**: Returns to startup screen without closing the application
+- **Intelligent management**: 
+  - If a temporary ontology is loaded, automatically cleans it
+  - Preserves permanent Virtuoso ontologies
+  - Allows switching between different graphs without restarting the server
 
-**Flujo de navegación:**
+**Navigation flow:**
 ```
-Pantalla inicio → Seleccionar ontología → Visualización → Volver al menú → Nueva selección
+Startup screen → Select ontology → Visualization → Return to menu → New selection
 ```
 
-#### Uso del asistente conversacional
+#### Using the Conversational Assistant
 
-1. **Escribe tu pregunta** en lenguaje natural (español o inglés)
-2. **Envía la consulta** con clic en "Enviar" o presiona Enter
-3. **Recibe respuesta** contextualizada en formato Markdown
+1. **Type your question** in natural language (Spanish or English)
+2. **Send the query** by clicking "Send" or pressing Enter
+3. **Receive contextualized response** in Markdown format
 
-#### 🏷️ Sistema de etiquetas interactivas
+#### 🏷️ Interactive Tag System
 
-El asistente incluye un sistema de etiquetas que aparecen automáticamente en las respuestas para facilitar la navegación y expansión del grafo:
+The assistant includes a tag system that appears automatically in responses to facilitate navigation and graph expansion:
 
-| Etiqueta | Estado | Función | Descripción |
-|----------|--------|---------|-------------|
-| **@Browse** | ✅ **Funcional** | Expandir grafo inteligente | Expande solo las entidades más relevantes basándose en análisis LLM con threshold de confianza |
-| **@Select** | 🚧 **En desarrollo** | Seleccionar nodo | Selecciona y centra automáticamente un nodo específico en la visualización |
-| **@Create** | 🚧 **En desarrollo** | Crear nuevo nodo | Permite crear nuevos nodos o relaciones en el grafo |
+| Tag | Status | Function | Description |
+|-----|--------|----------|-------------|
+| **@Browse** | ✅ **Functional** | Smart graph expansion | Expands only the most relevant entities based on LLM analysis with confidence threshold |
+| **@Select** | 🚧 **In development** | Select node | Automatically selects and centers a specific node in the visualization |
+| **@Create** | 🚧 **In development** | Create new node | Allows creating new nodes or relationships in the graph |
 
-#### 🔍 Funcionalidad @Browse - Expansión inteligente
+#### 🔍 @Browse Functionality - Smart Expansion
 
-**@Browse** utiliza un sistema avanzado de análisis semántico para expandir únicamente las entidades más relevantes:
+**@Browse** uses an advanced semantic analysis system to expand only the most relevant entities:
 
-**Ventajas del sistema de threshold:**
-- ✅ **Rendimiento**: Mantiene la fluidez de la visualización
-- ✅ **Contexto**: Expande solo entidades semánticamente coherentes
+**Threshold system advantages:**
+- ✅ **Performance**: Maintains visualization fluidity
+- ✅ **Context**: Expands only semantically coherent entities
 
-**Ejemplos de uso del sistema @Browse:**
+**Examples of @Browse system usage:**
 
-El sistema @Browse funciona agregando la etiqueta en **tu pregunta**, no en la respuesta del asistente.
+The @Browse system works by adding the tag in **your question**, not in the assistant's response.
 
-**Ejemplo 1: Consulta básica con expansión automática**
+**Example 1: Basic query with automatic expansion**
 ```
-👤 Usuario: "¿Qué tipos de vehículos existen? @Browse"
+👤 User: "What types of vehicles exist? @Browse"
 
-🤖 Asistente: Los tipos principales de vehículos incluyen:
-- Vehículos de motor: automóviles, motocicletas, camiones, autobuses
-- Vehículos sin motor: bicicletas, patinetes, vehículos de tracción animal
-- Vehículos acuáticos: barcos, submarinos, kayaks
-- Vehículos aéreos: aviones, helicópteros, globos aerostáticos
+🤖 Assistant: The main types of vehicles include:
+- Motor vehicles: cars, motorcycles, trucks, buses
+- Non-motor vehicles: bicycles, scooters, animal-drawn vehicles
+- Watercraft: boats, submarines, kayaks
+- Aircraft: airplanes, helicopters, hot air balloons
 ```
-**Resultado:** Los nodos relacionados con vehículos se expanden automáticamente en la visualización.
+**Result:** Vehicle-related nodes are automatically expanded in the visualization.
 
-**Ejemplo 2: Consulta específica con análisis inteligente**
+**Example 2: Specific query with intelligent analysis**
 ```
-👤 Usuario: "Explícame sobre protocolos de red @Browse"
+👤 User: "Explain network protocols @Browse"
 
-🤖 Asistente: Los protocolos de red definen las reglas de comunicación:
-- HTTP/HTTPS para transferencia web
-- TCP/UDP para transporte de datos
-- IP para enrutamiento entre redes
-- DNS para resolución de nombres
+🤖 Assistant: Network protocols define communication rules:
+- HTTP/HTTPS for web transfer
+- TCP/UDP for data transport
+- IP for routing between networks
+- DNS for name resolution
 ```
-**Resultado:** Solo los protocolos más relevantes aparecen en el grafo según el análisis del LLM.
+**Result:** Only the most relevant protocols appear in the graph according to LLM analysis.
 
-### 🧠 Sistema avanzado de procesamiento de consultas
+### 🧠 Advanced Query Processing System
 
-Cuando un usuario hace una pregunta, el sistema ejecuta un proceso de análisis y respuesta:
+When a user asks a question, the system executes an analysis and response process:
 
-#### 1. **Recepción y análisis inicial**
-   - Recibe la consulta del usuario (ej: "¿qué tipos de [entidad] hay?")
-   - Identifica el contexto visual actual (nodos y enlaces mostrados en la interfaz)
+#### 1. **Initial Reception and Analysis**
+   - Receives user query (e.g., "what types of [entity] are there?")
+   - Identifies current visual context (nodes and links displayed in the interface)
 
-#### 2. **Enriquecimiento semántico automatizado**
-   - **Análisis de anotaciones**: Extrae automáticamente labels, descripciones y metadatos de la ontología
-   - **Detección de vocabularios**: Identifica los predicados presentes
+#### 2. **Automated Semantic Enrichment**
+   - **Annotation analysis**: Automatically extracts labels, descriptions, and metadata from the ontology
+   - **Vocabulary detection**: Identifies present predicates
 
-#### 3. **Estrategia adaptativa de embeddings** (en revisión para implementación)
-   - **Análisis de contenido**: Clasifica el texto por longitud y complejidad técnica
-   - **Selección de modelo**: Elige automáticamente el modelo de embedding óptimo:
-     - **LaBSE**: Para labels y textos cortos (≤100 caracteres)
-     - **all-mpnet-base-v2**: Para consultas medias y comprensión general
-     - **all-MiniLM-L12-v2**: Para descripciones largas y contexto extenso
-   - **Cálculo vectorial**: Genera representaciones semánticas especializadas
+#### 3. **Adaptive Embedding Strategy** (under review for implementation)
+   - **Content analysis**: Classifies text by length and technical complexity
+   - **Model selection**: Automatically chooses the optimal embedding model:
+     - **LaBSE**: For labels and short texts (≤100 characters)
+     - **all-mpnet-base-v2**: For medium queries and general understanding
+     - **all-MiniLM-L12-v2**: For long descriptions and extensive context
+   - **Vector calculation**: Generates specialized semantic representations
 
-#### 4. **Sistema de puntuación inteligente**
-   - **Bonificación por visibilidad**: para entidades visibles en el grafo actual
-   - **Similitud semántica**: Scoring basado en distancia coseno de embeddings
-   - **Coincidencias exactas**: Máxima puntuación para matches directos
+#### 4. **Intelligent Scoring System**
+   - **Visibility bonus**: For entities visible in the current graph
+   - **Semantic similarity**: Scoring based on cosine distance of embeddings
+   - **Exact matches**: Maximum score for direct matches
 
-#### 5. **Construcción del contexto específico**
-   - Selecciona las entidades mejor puntuadas como núcleo de la respuesta
-   - Extrae tripletas RDF relacionadas con estas entidades clave
-   - Incluye relaciones jerárquicas, propiedades y metadatos relevantes en el prompt final
+#### 5. **Specific Context Construction**
+   - Selects the highest-scoring entities as the response core
+   - Extracts RDF triples related to these key entities
+   - Includes hierarchical relationships, properties, and relevant metadata in the final prompt
 
-#### 6. **Generación de Respuesta con Razonamiento Adaptativo (Deep Thinking)**
+#### 6. **Response Generation with Adaptive Reasoning (Deep Thinking)**
 
-El sistema abandona el enfoque de una sola consulta y adopta un proceso de razonamiento adaptativo en múltiples pasos para maximizar la precisión y relevancia de la respuesta, basándose exclusivamente en el conocimiento de la ontología.
+The system abandons the single-query approach and adopts a multi-step adaptive reasoning process to maximize response accuracy and relevance, based exclusively on ontology knowledge.
 
-*   **Paso 1: Análisis de Intención de la Consulta**
-    *   Primero, el sistema clasifica la intención de la pregunta del usuario para determinar su naturaleza.
+*   **Step 1: Query Intent Analysis**
+    *   First, the system classifies the user's question intent to determine its nature.
 
-*   **Paso 2: Selección de Estrategia de Razonamiento Adaptativo**
-    *   Basado en la intención, se elige la estrategia más eficiente:
-        *   **Respuesta Directa (1 llamada al LLM):** Para preguntas simples y definiciones.
-        *   **Análisis Estructurado (2 llamadas al LLM):** Para consultas que requieren explorar relaciones, jerarquías o propiedades.
-        *   **Análisis Comparativo (3 llamadas al LLM):** Para comparar dos o más entidades de forma detallada.
+*   **Step 2: Adaptive Reasoning Strategy Selection**
+    *   Based on intent, the most efficient strategy is chosen:
+        *   **Direct Response (1 LLM call):** For simple questions and definitions.
+        *   **Structured Analysis (2 LLM calls):** For queries requiring exploration of relationships, hierarchies, or properties.
+        *   **Comparative Analysis (3 LLM calls):** For comparing two or more entities in detail.
 
-*   **Paso 3: Proceso de Razonamiento en Múltiples Pasos (Chain-of-Thought)**
-    *   Una vez seleccionada la estrategia, el sistema ejecuta una cadena de pensamiento guiada:
-        *   Si la estrategia es **Respuesta Directa**, se realiza una única llamada al LLM con un prompt detallado que le instruye a responder de forma concisa y directa, basándose estrictamente en el contexto.
-        *   Si la estrategia es **Análisis Estructurado**, el proceso se divide en dos roles:
-            1.  **Rol de Analista:** En la primera llamada, el LLM extrae los hechos y relaciones relevantes del grafo en un formato técnico y estructurado (JSON), sin intentar aún dar una respuesta al usuario.
-            2.  **Rol de Comunicador:** En la segunda llamada, el LLM recibe su propio análisis técnico y lo utiliza como base para sintetizar y redactar una respuesta final coherente y en lenguaje natural.
-        *   Si la estrategia es **Análisis Comparativo**, el razonamiento se extiende a tres pasos:
-            1.  **Análisis de Entidad A:** El LLM realiza un análisis estructurado solo de la primera entidad.
-            2.  **Análisis de Entidad B:** Se repite el proceso, realizando un análisis estructurado solo de la segunda entidad.
-            3.  **Rol de Comparador:** En la llamada final, el LLM recibe ambos análisis y tiene la única tarea de compararlos para generar una respuesta que resalte similitudes y diferencias.
+*   **Step 3: Multi-Step Reasoning Process (Chain-of-Thought)**
+    *   Once the strategy is selected, the system executes a guided thought chain:
+        *   If the strategy is **Direct Response**, a single LLM call is made with a detailed prompt instructing it to respond concisely and directly, strictly based on context.
+        *   If the strategy is **Structured Analysis**, the process is divided into two roles:
+            1.  **Analyst Role:** In the first call, the LLM extracts relevant facts and relationships from the graph in a technical, structured format (JSON), without yet attempting to answer the user.
+            2.  **Communicator Role:** In the second call, the LLM receives its own technical analysis and uses it as a basis to synthesize and write a coherent final response in natural language.
+        *   If the strategy is **Comparative Analysis**, reasoning extends to three steps:
+            1.  **Entity A Analysis:** The LLM performs structured analysis only on the first entity.
+            2.  **Entity B Analysis:** The process repeats, performing structured analysis only on the second entity.
+            3.  **Comparator Role:** In the final call, the LLM receives both analyses and has the sole task of comparing them to generate a response highlighting similarities and differences.
 
-*   **Paso 4: Contexto Enriquecido y Respuesta Final**
-    *   La respuesta final se construye exclusivamente a partir de los hechos verificados en la ontología durante el proceso de razonamiento, garantizando que el modelo no invente información.
+*   **Step 4: Enriched Context and Final Response**
+    *   The final response is built exclusively from facts verified in the ontology during the reasoning process, ensuring the model doesn't fabricate information.
 
-## 🔄 Arquitectura del sistema
+## 🔄 System Architecture
 
-### Componentes principales
+### Main Components
 
-- **`server.py`**: Servidor principal Flask con asistente conversacional
-- **`main.py`**: API FastAPI para consultas SPARQL y procesamiento RDF
-- **`kg_embedding.py`**: Motor de embeddings con estrategias adaptativas
-- **`model_config.py`**: Configuración centralizada de todos los modelos
-- **`annotation_enrichment.py`**: Sistema de enriquecimiento semántico automático
-- **`adaptive_embedding_strategy.py`**: Estrategia de selección inteligente de modelos
-- **`virtuoso_client.py`**: Cliente especializado para comunicación con Virtuoso
-- **`index.js`**: Frontend de visualización con Cosmograph
-- **`sparql.js`**: Manejador avanzado de consultas SPARQL
-- **`interactive-startup.js`**: Sistema de pantalla de inicio interactiva
+- **`server.py`**: Main Flask server with conversational assistant
+- **`main.py`**: FastAPI API for SPARQL queries and RDF processing
+- **`kg_embedding.py`**: Embedding engine with adaptive strategies
+- **`model_config.py`**: Centralized configuration for all models
+- **`annotation_enrichment.py`**: Automatic semantic enrichment system
+- **`adaptive_embedding_strategy.py`**: Intelligent model selection strategy
+- **`virtuoso_client.py`**: Specialized client for Virtuoso communication
+- **`index.js`**: Visualization frontend with Cosmograph
+- **`sparql.js`**: Advanced SPARQL query handler
+- **`interactive-startup.js`**: Interactive startup screen system
 
-### ⚡ Proceso detallado de inicialización del servidor
+### ⚡ Detailed Server Initialization Process
 
-Al ejecutar `python server.py`, el sistema realiza una **inicialización ligera** y queda en espera de selección de ontología:
+When running `python server.py`, the system performs a **lightweight initialization** and waits for ontology selection:
 
-#### **Fase 1: Arranque del servidor (inmediato)**
-1. **Inicialización de Flask**: Configura rutas
-2. **Configuración de endpoints**: `/chat`, `/reset`, `/clear_cache`, `/select-graph`
-3. **Verificación de caché**: Comprueba si existe caché previo válido
+#### **Phase 1: Server Startup (immediate)**
+1. **Flask initialization**: Configures routes
+2. **Endpoint configuration**: `/chat`, `/reset`, `/clear_cache`, `/select-graph`
+3. **Cache verification**: Checks if valid previous cache exists
 
-#### **Fase 2: Selección de ontología (usuario)**
-- **Usuario navega** a la pantalla de inicio interactiva
-- **Selecciona ontología** desde Virtuoso o sube nueva ontología
-- **Sistema recibe** petición `/select-graph` con URI del grafo
-- **Inicia procesamiento** automático
+#### **Phase 2: Ontology Selection (user)**
+- **User navigates** to interactive startup screen
+- **Selects ontology** from Virtuoso or uploads new ontology
+- **System receives** `/select-graph` request with graph URI
+- **Starts automatic processing**
 
-#### **Fase 3: Procesamiento automático de Knowledge Graph**
+#### **Phase 3: Automatic Knowledge Graph Processing**
 
-Una vez seleccionada la ontología, el sistema ejecuta la inicialización completa:
+Once the ontology is selected, the system executes complete initialization:
 
-##### 1. **Gestión inteligente de caché**
-   - Verifica caché existente para el grafo específico seleccionado
-   - Comprueba timestamps para detectar cambios en la ontología
-   - Valida integridad de modelos y embeddings almacenados
-   - Decide si reutilizar caché o regenerar desde cero
+##### 1. **Intelligent Cache Management**
+   - Verifies existing cache for the specific selected graph
+   - Checks timestamps to detect ontology changes
+   - Validates integrity of stored models and embeddings
+   - Decides whether to reuse cache or regenerate from scratch
 
-##### 2. **Extracción y análisis ontológico**
-   - Se conecta al servidor Virtuoso con el grafo seleccionado
-   - Extrae la estructura completa de clases y jerarquías
-   - Analiza automáticamente las anotaciones presentes (descubrimiento de predicado automático)
-   - Genera mapeo multilingüe entre términos equivalentes
+##### 2. **Ontological Extraction and Analysis**
+   - Connects to Virtuoso server with selected graph
+   - Extracts complete class structure and hierarchies
+   - Automatically analyzes present annotations (automatic predicate discovery)
+   - Generates multilingual mapping between equivalent terms
 
-##### 3. **Entrenamiento del modelo de grafos de conocimiento**
-   - **Selecciona ComplEx** como modelo principal
-   - **Conversión a formato PyKEEN**: Transforma tripletas RDF a tensores (matrices)
-   - **Aprendizaje de representaciones**:
-     - Convierte entidades y relaciones en vectores numéricos
-     - Captura patrones mediante representaciones complejas (números complejos)
-     - Optimiza representaciones para preservar relaciones semánticas asimétricas
-   - **Entrenamiento iterativo**:
-     - Procesa datos en lotes de 512 ejemplos (configurable)
-     - Ejecuta 1500 épocas de entrenamiento (ajustable en `model_config.py`)
-     - Aplica regularización para evitar sobreajuste
-   - **Evaluación de calidad**: Mide precisión en predicción de enlaces
+##### 3. **Knowledge Graph Model Training**
+   - **Selects ComplEx** as main model
+   - **PyKEEN format conversion**: Transforms RDF triples to tensors (matrices)
+   - **Representation learning**:
+     - Converts entities and relationships to numerical vectors
+     - Captures patterns through complex representations (complex numbers)
+     - Optimizes representations to preserve asymmetric semantic relationships
+   - **Iterative training**:
+     - Processes data in batches of 512 examples (configurable)
+     - Runs 1500 training epochs (adjustable in `model_config.py`)
+     - Applies regularization to avoid overfitting
+   - **Quality evaluation**: Measures link prediction accuracy
 
-##### 4. **Generación de embeddings adaptativos** (en revisión)
-   - **Carga del sistema adaptativo**: Inicializa múltiples modelos especializados
-   - **Análisis de contenido ontológico**:
-     - Clasifica entidades por longitud y complejidad
-     - Detecta contenido técnico vs. descriptivo
-     - Identifica idioma predominante de las anotaciones
-   - **Generación vectorial especializada**:
-     - **LaBSE**: Para labels cortos y términos multilingües
-     - **all-mpnet-base-v2**: Para descripciones de longitud media
-     - **all-MiniLM-L12-v2**: Para textos largos y contextos extensos
+##### 4. **Adaptive Embedding Generation** (under review)
+   - **Adaptive system loading**: Initializes multiple specialized models
+   - **Ontological content analysis**:
+     - Classifies entities by length and complexity
+     - Detects technical vs. descriptive content
+     - Identifies predominant annotation language
+   - **Specialized vector generation**:
+     - **LaBSE**: For short labels and multilingual terms
+     - **all-mpnet-base-v2**: For medium-length descriptions
+     - **all-MiniLM-L12-v2**: For long texts and extensive contexts
 
-##### 5. **Construcción del sistema de conocimiento**
-   - **Indexación semántica**: Crea índices invertidos para búsqueda rápida
-   - **Mapeo de términos**: Construye diccionarios español↔inglés automáticos
-   - **Jerarquías de clases**: Analiza relaciones `rdfs:subClassOf` recursivamente
-   - **Sistema de sinónimos**: Detecta términos equivalentes automáticamente
+##### 5. **Knowledge System Construction**
+   - **Semantic indexing**: Creates inverted indexes for fast search
+   - **Term mapping**: Builds automatic Spanish↔English dictionaries
+   - **Class hierarchies**: Recursively analyzes `rdfs:subClassOf` relationships
+   - **Synonym system**: Automatically detects equivalent terms
 
-##### 6. **Persistencia y optimización**
-   - **Almacenamiento en caché**: Guarda todos los artefactos en `.cache/`
-   - **Verificación de integridad**: Checksums para validar datos
-   - **Logs detallados**: Registro de todo el proceso de inicialización
+##### 6. **Persistence and Optimization**
+   - **Cache storage**: Saves all artifacts in `.cache/`
+   - **Integrity verification**: Checksums to validate data
+   - **Detailed logs**: Record of entire initialization process
 
-##### 7. **Finalización**
-   - **Sistema KG activado**: Knowledge Graph embeddings listos
-   - **Asistente habilitado**: Endpoint `/chat` operativo
-   - **Visualización preparada**: Frontend puede consultar datos del grafo
+##### 7. **Finalization**
+   - **KG system activated**: Knowledge Graph embeddings ready
+   - **Assistant enabled**: `/chat` endpoint operational
+   - **Visualization prepared**: Frontend can query graph data
 
-## 📡 API REST
+## 📡 REST API
 
-### Endpoints del servidor principal (Flask - Puerto 5000)
+### Main Server Endpoints (Flask - Port 5000)
 
-| Endpoint       | Método | Descripción                         | Parámetros |
+| Endpoint       | Method | Description                         | Parameters |
 |----------------|--------|-------------------------------------|------------|
-| `/chat`        | POST   | Enviar pregunta al asistente        | `message`, `graph_data` |
-| `/reset`       | POST   | Reiniciar conversación              | Ninguno |
-| `/clear_cache` | POST   | Limpiar caché del sistema           | Ninguno |
-| `/select-graph` | POST   | Seleccionar grafo para inicializar  | `graph_uri`, `is_temporary` |
-| `/initialize-progress` | GET | Obtener progreso de inicialización | Ninguno |
-| `/upload-ontology` | POST | Subir archivo de ontología       | `ontology` (FormData) |
-| `/cleanup-ontology` | POST | Limpiar ontología temporal       | `graph_uri` |
+| `/chat`        | POST   | Send question to assistant          | `message`, `graph_data` |
+| `/reset`       | POST   | Reset conversation                  | None |
+| `/clear_cache` | POST   | Clear system cache                  | None |
+| `/select-graph` | POST   | Select graph to initialize          | `graph_uri`, `is_temporary` |
+| `/initialize-progress` | GET | Get initialization progress       | None |
+| `/upload-ontology` | POST | Upload ontology file               | `ontology` (FormData) |
+| `/cleanup-ontology` | POST | Clean up temporary ontology        | `graph_uri` |
 
-### Endpoints de consultas SPARQL (FastAPI - Puerto 32323)
+### SPARQL Query Endpoints (FastAPI - Port 32323)
 
-| Endpoint          | Método | Descripción                      | Parámetros |
+| Endpoint          | Method | Description                      | Parameters |
 |-------------------|--------|----------------------------------|------------|
-| `/query_rdf`      | POST   | Consultar archivo RDF local      | `file_path`, `sparql_query` |
-| `/query_virtuoso` | POST   | Consultar servidor Virtuoso      | `virtuoso_endpoint`, `virtuoso_database`, `virtuoso_username`, `virtuoso_password`, `query` |
-| `/available-graphs` | GET  | Listar grafos disponibles en Virtuoso | Ninguno |
-| `/select-graph`   | POST   | Seleccionar grafo específico (por migrar)     | `graph_uri` |
-| `/upload-ontology` | POST  | Subir archivo de ontología (por migrar)       | `ontology` (FormData) |
-| `/cleanup-ontology` | POST | Limpiar ontología temporal (por migrar)       | `graph_uri` |
+| `/query_rdf`      | POST   | Query local RDF file             | `file_path`, `sparql_query` |
+| `/query_virtuoso` | POST   | Query Virtuoso server            | `virtuoso_endpoint`, `virtuoso_database`, `virtuoso_username`, `virtuoso_password`, `query` |
+| `/available-graphs` | GET  | List available graphs in Virtuoso | None |
+| `/select-graph`   | POST   | Select specific graph (to be migrated) | `graph_uri` |
+| `/upload-ontology` | POST  | Upload ontology file (to be migrated) | `ontology` (FormData) |
+| `/cleanup-ontology` | POST | Clean up temporary ontology (to be migrated) | `graph_uri` |
 
-## ⚙️ Configuración avanzada
+## ⚙️ Advanced Configuration
 
-### Sistema de caché inteligente multicapa
+### Multi-layer Intelligent Cache System
 
-El sistema utiliza un caché sofisticado ubicado en `.cache/` con componentes especializados:
+The system uses a sophisticated cache located in `.cache/` with specialized components:
 
-- **`ontology_structure.pkl`**: Estructura jerárquica de clases y metadatos
-- **`all_triples.pkl`**: Conjunto completo de tripletas RDF
-- **`kg_model_*.pkl`**: Modelos de grafos de conocimiento entrenados
-- **`embeddings_*.pkl`**: Vectores semánticos por estrategia
-- **`annotations_*.pkl`**: Sistema de anotaciones enriquecidas
-- **Expiración automática**: 12 horas por defecto (configurable)
+- **`ontology_structure.pkl`**: Hierarchical class structure and metadata
+- **`all_triples.pkl`**: Complete set of RDF triples
+- **`kg_model_*.pkl`**: Trained knowledge graph models
+- **`embeddings_*.pkl`**: Semantic vectors by strategy
+- **`annotations_*.pkl`**: Enriched annotation system
+- **Automatic expiration**: 12 hours by default (configurable)
 
-**Limpieza manual del caché:**
+**Manual cache cleanup:**
 
 ```bash
-# Limpiar completamente
+# Complete cleanup
 curl -X POST http://localhost:5000/clear_cache
 
-# O eliminar directamente
+# Or delete directly
 rm -rf .cache/
 ```
 
-### Optimización de rendimiento
+### Performance Optimization
 
-#### Configuración de umbrales y límites:
+#### Threshold and limit configuration:
 
 ```python
-# En kg_embedding.py
-SIMILARITY_THRESHOLD = 0.7      # Umbral mínimo de similitud
-MAX_ENTITIES_PER_QUERY = 50     # Entidades máximas por consulta
-BATCH_SIZE_EMBEDDINGS = 32      # Lote para cálculo de embeddings
-CACHE_EXPIRATION_HOURS = 12     # Expiración de caché
+# In kg_embedding.py
+SIMILARITY_THRESHOLD = 0.7      # Minimum similarity threshold
+MAX_ENTITIES_PER_QUERY = 50     # Maximum entities per query
+BATCH_SIZE_EMBEDDINGS = 32      # Batch size for embedding calculation
+CACHE_EXPIRATION_HOURS = 12     # Cache expiration
 ```
 
-## ⚠️ Solución de problemas
+## ⚠️ Troubleshooting
 
-### Errores comunes y soluciones
+### Common Errors and Solutions
 
 #### 🔴 **"Knowledge Graph embeddings not initialized"**
 ```bash
-# Solución: Limpiar caché y reiniciar
+# Solution: Clear cache and restart
 curl -X POST http://localhost:5000/clear_cache
 rm -rf .cache/
 python server.py
